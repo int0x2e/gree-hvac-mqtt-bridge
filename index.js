@@ -86,6 +86,7 @@ if (argv['mqtt-username'] && argv['mqtt-password']) {
   mqttOptions.username = argv['mqtt-username'];
   mqttOptions.password = argv['mqtt-password'];
   authLog = ' as "' + mqttOptions.username + '"';
+  rejectUnauthorized = false;
 }
 const client  = mqtt.connect(argv['mqtt-broker-url'], mqttOptions);
 client.on('connect', () => {
