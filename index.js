@@ -86,8 +86,11 @@ if (argv['mqtt-username'] && argv['mqtt-password']) {
   mqttOptions.username = argv['mqtt-username'];
   mqttOptions.password = argv['mqtt-password'];
   authLog = ' as "' + mqttOptions.username + '"';
-  rejectUnauthorized = false;
 }
+if (argv['mqtt-broker-url'].startsWith("mqtts://") || argv['mqtt-broker-url'].startsWith("tls://") || argv['mqtt-broker-url'].startsWith("ssl://")) {
+  mqttOptions.rejectUnauthorized = false;
+}
+
 const client  = mqtt.connect(argv['mqtt-broker-url'], mqttOptions);
 client.on('connect', () => {
   console.log('[MQTT] Connected to broker on ' + argv['mqtt-broker-url'] + authLog)
